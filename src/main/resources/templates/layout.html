@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gestion de stock</title>
+    
+    <!-- Assurez-vous que les chemins d'accès aux fichiers CSS sont corrects -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59taF9gyjxM2DUpDE3aF5gE" crossorigin="anonymous">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #343a40 !important;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-brand {
+    padding: 0;
+    margin-right: 0;
+    font-size: 1.7rem;
+    line-height: inherit;
+    white-space: nowrap;
+    transition: opacity 0.3s ease-in-out;
+    background-color: blue; /* Couleur de fond bleue */
+}
+.navbar-brand {
+        padding: 0;
+        margin-right: 0;
+        font-size: 1.7rem;
+        line-height: inherit;
+        white-space: nowrap;
+        transition: opacity 0.3s ease-in-out;
+        background-color: blue; /* Couleur de fond bleue */
+        border-radius: 50%; /* Ajout d'un bord arrondi pour créer un cercle */
+        padding: 10px; /* Ajuster la taille du cercle en fonction de vos besoins */
+        display: inline-block; /* Assurer que le cercle entoure le texte */
+    }
+
+    .navbar-brand:hover {
+        opacity: 0.8;
+    }
+
+    .navbar-brand i {
+        color: red; /* Couleur rouge pour l'icône */
+    }
+.navbar-brand:hover {
+    opacity: 0.8;
+}
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+        }
+
+        .navbar-dark .navbar-nav {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .navbar-dark .navbar-nav .nav-item {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .navbar-fixed-bottom {
+            background-color: #343a40;
+            color: white;
+            padding: 0.5rem 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+    </style>
+</head>
+
+<body>
+   <header>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/home}">
+    <i class="fas fa-home"></i> Gestion de Stock
+</a>
+
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/produit/index}">G.Produits</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/categories/index}">G.Catégories</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/clients/index}">G.Clients</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/factures/index}">G.Factures</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/devises/index}">G.Devises</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/reglements/index}">G.règlements</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <section layout:fragment="content">
+        <!-- Le contenu de la page spécifique sera inclus ici -->
+    </section>
+</body>
+
+</html>

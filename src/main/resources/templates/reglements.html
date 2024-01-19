@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Liste des Règlements</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container mt-4">
+            <form th:action="@{/reglements/search}" method="get">
+                <div class="mb-3">
+                    <label for="modePaiement" class="form-label">Mode de Paiement:</label>
+                    <input type="text" class="form-control" id="modePaiement" name="modePaiement" th:value="${modePaiement}"/>
+                </div>
+                <!-- Ajoutez ici d'autres filtres spécifiques aux clients -->
+                <button type="submit" class="btn btn-primary me-3">Chercher</button>
+            </form>
+        </div>
+
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    DataTable Example
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Mode de Règlement</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="r : ${reglements}">
+                                    <td th:text="${r.id}"></td>
+                                    <td th:text="${r.modePaiement}"></td>
+                                    <td>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <form th:action="@{/reglements/edit(id=${r.id})}" method="post">
+                                                <button type="submit" class="btn btn-primary me-2">
+                                                    <i class="fas fa-edit"></i> Modifier
+                                                </button>
+                                            </form>
+                                            <form th:action="@{/reglements/delete(id=${r.id})}" method="post">
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Confirmez-vous la suppression de ce règlement?')">
+                                                    <i class="fas fa-trash-alt"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container mt-4">
+                            <a th:href="@{/reglements/form}" class="btn btn-success">Ajouter un règlement</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <!-- Autres éléments en dessous du tableau -->
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

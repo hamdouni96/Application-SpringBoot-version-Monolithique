@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Ajouter une Facture</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+   document.addEventListener("DOMContentLoaded", function () {
+    resetTotal();
+});
+
+function addExistingProduct() {
+    var existingProductElement = document.getElementById('existingProduct');
+    var existingProductQuantityElement = document.getElementById('existingProductQuantity');
+
+    if (existingProductElement && existingProductQuantityElement) {
+        var existingProductId = existingProductElement.value;
+        var existingProductQuantity = existingProductQuantityElement.value;
+
+        if (existingProductId !== "") {
+            var selectedProduct = existingProductElement.options[existingProductElement.selectedIndex];
+            var newRow = document.createElement('tr');
+            var totalPrice = parseFloat(existingProductQuantity) * parseFloat(selectedProduct.text.split(" - ")[1]);
+            newRow.innerHTML = '<td><input type="hidden" name="produits[' + facture.produits.length + '].id" value="' + existingProductId + '"/>' + selectedProduct.text + '</td>' +
+                               '<td>' + selectedProduct.text.split(" - ")[1] + '</td>' +
+                               '<td><input type="number" name="produits[' + facture.produits.length + '].quantite" value="' + existingProductQuantity + '" class="form-control" /></td>';
+
+            var tableBody = document.querySelector('table tbody');
+            if (tableBody) {
+                tableBody.appendChild(newRow);
+
+                // Mise à jour de la case totale
+                updateTotal(totalPrice);
+            }
+        }
+    }
+}
+
+function updateTotal(price) {
+    var totalElement = document.getElementById('total');
+    if (totalElement) {
+        var currentTotal = parseFloat(totalElement.value) || 0;
+        var newTotal = currentTotal + price;
+        totalElement.value = newTotal.toFixed(2); // Mise à jour de la case totale avec deux décimales
+    }
+}
+
+// Fonction pour réinitialiser la case totale
+function resetTotal() {
+    var totalElement = document.getElementById('total');
+    if (totalElement) {
+        totalElement.value = "0.00";
+    }
+}
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container mt-4">
+            <h2>Ajouter une Facture</h2>
+            <form th:action="@{/factures/save}" method="post" th:object="${facture}">
+                <!-- Client Dropdown -->
+                <div class="mb-3">
+                    <label for="client" class="form-label">Client:</label>
+                    <select class="form-select" id="client" name="client.id" th:field="*{client.id}">
+                        <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.nom + ' ' + client.prenom}"></option>
+                    </select>
+                </div>
+
+                <!-- Table for Existing Products -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom du Produit</th>
+                            <th>Prix</th>
+                            <th>Quantité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="produit, produitStat : ${facture.produits}">
+                            <td th:text="${produit.designation}"></td>
+                            <td th:text="${produit.prix}"></td>
+                            <td>
+                                <input type="number" class="form-control" th:field="*{produits[__${produitStat.index}__].quantite}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Add Existing Product Section -->
+                <div class="mb-3">
+                    <label class="form-label">Ajouter un Produit Existant</label>
+                    <select class="form-select" id="existingProduct1" th:field="*{selectedProductId}">
+                        <option value="">Sélectionnez un Produit</option>
+                        <option th:each="produit : ${produits}" th:value="${produit.id}" th:text="${produit.designation + ' - ' + produit.prix}"></option>
+                    </select>
+                    <input type="number" class="form-control" id="existingProductQuantity1" placeholder="Quantité"/>
+<button type="button" class="btn btn-primary" onclick="addExistingProduct(1)">Ajouter</button>
+                </div>
+
+                <!-- Add Existing Product Section -->
+                <div class="mb-3">
+                    <label class="form-label">Ajouter un Produit Existant</label>
+                    <select class="form-select" id="existingProduct2" th:field="*{selectedProductId}">
+                        <option value="">Sélectionnez un Produit</option>
+                        <option th:each="produit : ${produits}" th:value="${produit.id}" th:text="${produit.designation + ' - ' + produit.prix}"></option>
+                    </select>
+                    <input type="number" class="form-control" id="existingProductQuantity2" placeholder="Quantité"/>
+                    <button type="button" class="btn btn-primary" onclick="addExistingProduct(2)">Ajouter</button>
+                </div>
+
+                <!-- Add Existing Product Section -->
+                <div class="mb-3">
+                    <label class="form-label">Ajouter un Produit Existant</label>
+                    <select class="form-select" id="existingProduct3" th:field="*{selectedProductId}">
+                        <option value="">Sélectionnez un Produit</option>
+                        <option th:each="produit : ${produits}" th:value="${produit.id}" th:text="${produit.designation + ' - ' + produit.prix}"></option>
+                    </select>
+                    <input type="number" class="form-control" id="existingProductQuantity3" placeholder="Quantité"/>
+                    <button type="button" class="btn btn-primary" onclick="addExistingProduct(3)">Ajouter</button>
+                </div>
+
+                <!-- Total -->
+                <div class="mb-3">
+                    <label for="total" class="form-label">Total:</label>
+                    <input type="text" class="form-control" id="total" name="totale" th:value="${facture.totale}" readonly="readonly"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+ 
+
+</body>
+</html>

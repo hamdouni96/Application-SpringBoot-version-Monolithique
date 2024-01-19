@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Liste des Catégories</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container mt-4">
+            <form th:action="@{index}" method="get">
+                <div class="mb-3">
+                    <label for="motCle" class="form-label">Mot Clé:</label>
+                    <input type="text" class="form-control" id="motCle" name="motCle" th:value="${motCle}"/>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:name="typeCategorie" id="toutes" th:value="Toutes" th:checked="${typeCategorie == 'Toutes'}">
+                        <label class="form-check-label" for="toutes">Toutes les catégories</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:name="typeCategorie" id="actives" th:value="Actives" th:checked="${typeCategorie == 'Actives'}">
+                        <label class="form-check-label" for="actives">Uniquement les catégories actives</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" th:name="typeCategorie" id="nonActives" th:value="NonActives" th:checked="${typeCategorie == 'NonActives'}">
+                        <label class="form-check-label" for="nonActives">Uniquement les catégories non actives</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary me-3">Chercher</button>
+                <button class="btn btn-primary">Appliquer</button>
+            </form>
+        </div>
+
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    DataTable Example
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Code</th>
+                                    <th>Libellé</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="c : ${categories}">
+                                    <td th:text="${c.id}"></td>
+                                    <td th:text="${c.code}"></td>
+                                    <td th:text="${c.libelle}"></td>
+                                    <td>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <form th:action="@{/categories/edit(id=${c.id})}" method="post">
+                                                <button type="submit" class="btn btn-primary me-2">
+                                                    <i class="fas fa-edit"></i> Modifier
+                                                </button>
+                                            </form>
+                                            <form th:action="@{/categories/delete(id=${c.id})}" method="post">
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Confirmez-vous la suppression de cette catégorie?')">
+                                                    <i class="fas fa-trash-alt"></i> Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container mt-4">
+                            <a th:href="@{form}" class="btn btn-success">Ajouter une catégorie</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <div class="container mt-4">
+            <nav aria-label="Pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container mt-4">
+            <!-- Autres éléments en dessous du tableau -->
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

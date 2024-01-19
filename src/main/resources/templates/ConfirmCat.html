@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Confirmation de Catégorie</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">Confirmation</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Code:</label>
+                        <label th:text="${categorie.code}"></label>
+                    </div>
+                    <div class="form-group">
+                        <label>Libellé:</label>
+                        <label th:text="${categorie.libelle}"></label>
+                    </div>
+                    <!-- Ajoutez d'autres champs de confirmation selon les besoins -->
+
+                </div>
+                <div class="panel-footer"> ----Gestion des catégories---</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

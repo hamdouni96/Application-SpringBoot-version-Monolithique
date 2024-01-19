@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Clients les plus fidèles</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <div class="container mt-4">
+            <h2>Clients les plus fidèles</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Total Achats</th>
+                    </tr>
+                </thead>
+                <tbody>
+         <tr>
+    <td th:text="${topClientWithTotalAmount[0][0].id}"></td>
+    <td th:text="${topClientWithTotalAmount[0][0].nom}"></td>
+    <td th:text="${topClientWithTotalAmount[0][0].prenom}"></td>
+    <td th:text="${totalAchats}"></td>
+</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

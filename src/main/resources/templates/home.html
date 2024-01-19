@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Page d'accueil</title>
+    <style>
+        /* Styles CSS pour organiser les divs verticalement */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Ajuster la hauteur selon les besoins */
+        }
+
+        .item {
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Image principale de la page d'accueil -->
+        <img src="chemin/vers/votre/image-principale.jpg" alt="Image principale">
+
+        <!-- Divs pour gérer les différentes parties de l'application -->
+        <div class="item">
+            <img src="chemin/vers/image-client.jpg" alt="Image Client">
+            <a th:href="@{/clients/index}">Gérer les clients</a>
+        </div>
+
+        <div class="item">
+            <img src="chemin/vers/image-produit.jpg" alt="Image Produit">
+             <a th:href="@{produit/index}">Gérer les produits</a>
+        </div>
+
+        <div class="item">
+            <img src="chemin/vers/image-categorie.jpg" alt="Image Catégorie">
+            <a href="/gerer_categories">Gérer les catégories</a>
+        </div>
+
+      
+
+        <div class="item">
+            <img src="chemin/vers/image-facture.jpg" alt="Image Facture">
+            <a  th:href="@{factures/index}">Gérer les factures</a>
+        </div>
+
+        <div class="item">
+            <img src="chemin/vers/image-devise.jpg" alt="Image Devise">
+             <a  th:href="@{devises/index}">Gérer les devises</a>
+        </div>
+
+        <div class="item">
+            <img src="chemin/vers/image-reglement.jpg" alt="Image Règlement">
+             <a  th:href="@{reglement/index}">Gérer les règlements</a>
+        </div>
+    </div>
+</body>
+</html>

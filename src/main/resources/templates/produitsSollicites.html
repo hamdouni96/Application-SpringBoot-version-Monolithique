@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <title>Produit Sollicité</title>
+    <!-- Ajoutez ici vos liens vers les feuilles de style ou d'autres ressources nécessaires -->
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container mt-4">
+            <h1>Produit Sollicité</h1>
+            <div th:if="${produitSollicite != null}">
+                <p>Designation: <span th:text="${produitSollicite.designation}"></span></p>
+                <p>Prix: <span th:text="${produitSollicite.prix}"></span></p>
+                <p>Quantité: <span th:text="${produitSollicite.quantite}"></span></p>
+                <!-- Ajoutez d'autres informations que vous souhaitez afficher -->
+            </div>
+            <div th:unless="${produitSollicite != null}">
+                <p>Aucun produit sollicité trouvé.</p>
+            </div>
+            <!-- Ajoutez ici d'autres éléments ou styles selon vos besoins -->
+        </div>
+    </div>
+    <!-- Ajoutez ici vos scripts JavaScript ou autres ressources nécessaires -->
+</body>
+</html>
